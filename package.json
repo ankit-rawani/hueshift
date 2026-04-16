@@ -1,0 +1,17 @@
+{
+  "name": "hueshift",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @hueshift/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2"
+  }
+}

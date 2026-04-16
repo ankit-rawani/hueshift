@@ -1,0 +1,52 @@
+{
+  "name": "hueshift-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for generating OKLCH color palettes, semantic UI tokens, and accessibility-checked color scales. Use with Claude Code, Cursor, Windsurf, or any MCP client.",
+  "type": "module",
+  "bin": {
+    "hueshift-mcp": "dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "color",
+    "palette",
+    "oklch",
+    "tailwind",
+    "design-tokens",
+    "color-palette",
+    "accessibility",
+    "wcag",
+    "contrast",
+    "claude",
+    "cursor",
+    "ai"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankitgdes/hueshift.git"
+  },
+  "author": "Ankit <ankitgdes@gmail.com>",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "tsup"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@hueshift/color-engine": "workspace:*",
+    "@hueshift/types": "workspace:*",
+    "tsup": "^8.5.1",
+    "tsx": "^4.19.0"
+  }
+}

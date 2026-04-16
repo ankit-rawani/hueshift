@@ -1,0 +1,33 @@
+node_modules/
+dist/
+graphify-out/
+.claude/
+.vite/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Build artifacts
+apps/web/dist/
+apps/mcp-server/dist/
+packages/color-engine/dist/
+packages/types/dist/
