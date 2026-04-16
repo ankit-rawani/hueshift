@@ -372,7 +372,7 @@ function App() {
               </button>
               <ShareButton />
               <button
-                onClick={generate}
+                onClick={() => generate()}
                 className="px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground text-xs font-medium hover:bg-muted transition-colors"
                 title="Regenerate (Space)"
               >
