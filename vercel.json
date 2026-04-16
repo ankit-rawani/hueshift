@@ -1,8 +1,0 @@
-{
-  "buildCommand": "pnpm --filter @hueshift/web build",
-  "outputDirectory": "apps/web/dist",
-  "installCommand": "pnpm install",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
