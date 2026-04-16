@@ -119,11 +119,11 @@ function App() {
         <header className="border-b border-border px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-md bg-gradient-to-br from-blue-500 to-purple-500" />
-            <h1 className="text-lg font-bold text-foreground tracking-tight">
+            <span className="text-lg font-bold text-foreground tracking-tight">
               Hueshift
-            </h1>
+            </span>
           </div>
-          <nav className="flex items-center gap-4 text-sm">
+          <nav aria-label="Main navigation" className="flex items-center gap-4 text-sm">
             <button
               onClick={() => setLibraryOpen(true)}
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -139,9 +139,9 @@ function App() {
         </header>
 
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-20">
-          <div className="max-w-2xl text-center space-y-6">
+          <article className="max-w-2xl text-center space-y-6">
             {/* Palette swatch */}
-            <div className="flex justify-center gap-2 mb-8">
+            <div className="flex justify-center gap-2 mb-8" role="img" aria-label="Example color palette with blue, purple, pink, orange, and green swatches">
               {["#3b82f6", "#8b5cf6", "#ec4899", "#f97316", "#10b981"].map(
                 (color, i) => (
                   <div
@@ -156,16 +156,16 @@ function App() {
               )}
             </div>
 
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight">
               The color palette brain
               <br />
               <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
                 your coding agent plugs into.
               </span>
-            </h2>
+            </h1>
 
             <p className="text-lg text-muted-foreground max-w-lg mx-auto">
-              Generate accessible, OKLCH-based palettes from a hex color
+              Generate accessible, OKLCH-based color palettes from a hex color
               or image. Export as Tailwind v4 tokens, CSS variables, or pipe
               directly into Claude Code via MCP.
             </p>
@@ -179,42 +179,95 @@ function App() {
               </button>
               <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card">
                 <code className="text-xs font-mono text-muted-foreground">
-                  npx @hueshift/mcp install
+                  npx hueshift-mcp@latest
                 </code>
               </div>
             </div>
 
             {/* Feature highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-12 text-left">
+            <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-12 text-left" aria-label="Key features">
               {[
                 {
-                  title: "OKLCH-First",
-                  desc: "Perceptually uniform. P3-aware. sRGB gamut-clamped. Not your grandma's hex picker.",
+                  title: "OKLCH Color Scales",
+                  desc: "Perceptually uniform 11-shade scales (50\u2013950). P3-aware, sRGB gamut-clamped. Tailwind v4 native.",
                 },
                 {
-                  title: "Agent-Ready",
-                  desc: "MCP server included. One command to connect Claude Code, Cursor, or Windsurf.",
+                  title: "MCP Server for AI Agents",
+                  desc: "One command to connect Claude Code, Cursor, or Windsurf. 8 tools for palette generation, contrast checks, and export.",
                 },
                 {
-                  title: "Accessibility Built In",
-                  desc: "WCAG AA/AAA + APCA contrast on every pair. Auto-fix suggestions when it fails.",
+                  title: "WCAG & APCA Contrast",
+                  desc: "Accessibility checked on every color pair. Auto-fix suggestions when contrast fails. AA, AAA, and APCA standards.",
                 },
               ].map((f) => (
                 <div
                   key={f.title}
                   className="p-4 rounded-xl border border-border bg-card space-y-1.5"
                 >
-                  <div className="text-sm font-semibold text-foreground">
+                  <h2 className="text-sm font-semibold text-foreground">
                     {f.title}
-                  </div>
-                  <div className="text-xs text-muted-foreground leading-relaxed">
+                  </h2>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     {f.desc}
-                  </div>
+                  </p>
                 </div>
               ))}
-            </div>
-          </div>
+            </section>
+
+            {/* SEO content section — visible, useful, keyword-rich */}
+            <section className="pt-16 pb-4 text-left max-w-xl mx-auto space-y-6">
+              <h2 className="text-xl font-semibold text-foreground">How it works</h2>
+              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <p>
+                  Enter a hex color or upload an image. Hueshift generates a
+                  complete color palette using the <strong>OKLCH color space</strong> &mdash;
+                  the same perceptually uniform format adopted by Tailwind CSS v4.
+                  Choose from five harmony modes: monochromatic, analogous,
+                  complementary, triadic, or split-complementary.
+                </p>
+                <p>
+                  Each palette includes <strong>11-shade color scales</strong> (50&ndash;950)
+                  and <strong>semantic UI tokens</strong> for both light and dark mode:
+                  background, foreground, primary, secondary, muted, accent, destructive,
+                  border, and ring &mdash; following shadcn/ui conventions.
+                </p>
+                <p>
+                  Export as a <strong>Tailwind v4 @theme block</strong>, CSS custom
+                  properties, SCSS variables, W3C design tokens, or plain JSON.
+                  Every export includes dark mode variants and is ready to paste
+                  into your project.
+                </p>
+              </div>
+
+              <h2 className="text-xl font-semibold text-foreground pt-4">Use with AI coding agents</h2>
+              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <p>
+                  The <strong>hueshift-mcp</strong> npm package is an MCP server that
+                  gives Claude Code, Cursor, Windsurf, and Claude Desktop direct
+                  access to palette generation. Install with one command:
+                </p>
+                <code className="block bg-muted text-muted-foreground p-3 rounded-lg font-mono text-xs">
+                  claude mcp add hueshift-mcp -- npx hueshift-mcp@latest
+                </code>
+                <p>
+                  Your agent can generate palettes from hex colors or images,
+                  check WCAG and APCA contrast, and export production-ready
+                  Tailwind v4 tokens &mdash; all without leaving the editor.
+                </p>
+              </div>
+            </section>
+          </article>
         </main>
+
+        <footer className="border-t border-border px-6 py-6 text-center text-xs text-muted-foreground space-y-2">
+          <p>
+            Hueshift &mdash; OKLCH color palette generator for Tailwind v4 and AI coding agents.
+            Free and <a href="https://github.com/ankitgdes/hueshift" className="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">open source</a>.
+          </p>
+          <p>
+            <a href="https://www.npmjs.com/package/hueshift-mcp" className="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">npm: hueshift-mcp</a>
+          </p>
+        </footer>
 
         {libraryOpen && <Library onClose={() => setLibraryOpen(false)} />}
       </div>
@@ -349,7 +402,7 @@ function App() {
               Use in Claude Code
             </div>
             <code className="block text-[11px] bg-muted text-muted-foreground p-2 rounded-md font-mono break-all">
-              npx @hueshift/mcp install
+              claude mcp add hueshift-mcp -- npx hueshift-mcp@latest
             </code>
           </div>
         </aside>

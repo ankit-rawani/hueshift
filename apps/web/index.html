@@ -2,12 +2,172 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hueshift — Color Palette Generator</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Hueshift — OKLCH Color Palette Generator for Tailwind v4, CSS & AI Coding Agents</title>
+    <meta name="title" content="Hueshift — OKLCH Color Palette Generator for Tailwind v4, CSS & AI Coding Agents" />
+    <meta name="description" content="Generate accessible, OKLCH-based color palettes from a hex color or image. Export as Tailwind v4 tokens, CSS variables, SCSS, or design-token JSON. Built-in WCAG & APCA contrast checking. MCP server for Claude Code, Cursor & Windsurf." />
+    <meta name="keywords" content="color palette generator, OKLCH color palette, Tailwind v4 color generator, CSS color palette, design tokens, color scale generator, WCAG contrast checker, APCA contrast, dark mode color palette, MCP server, Claude Code colors, Cursor AI colors, accessible color palette, hex to Tailwind, image color extraction, color harmony, brand color generator, UI color system, shadcn colors, color picker tool" />
+    <meta name="author" content="Hueshift" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://hueshift.dev/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hueshift.dev/" />
+    <meta property="og:title" content="Hueshift — OKLCH Color Palette Generator for Tailwind v4 & AI Agents" />
+    <meta property="og:description" content="Generate accessible, OKLCH-based color palettes. Export as Tailwind v4 tokens, CSS vars, or pipe directly into Claude Code via MCP. WCAG & APCA contrast built in." />
+    <meta property="og:image" content="https://hueshift.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hueshift color palette generator showing OKLCH-based color swatches with Tailwind v4 export" />
+    <meta property="og:site_name" content="Hueshift" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://hueshift.dev/" />
+    <meta property="twitter:title" content="Hueshift — OKLCH Color Palette Generator for Tailwind v4 & AI Agents" />
+    <meta property="twitter:description" content="Generate accessible, OKLCH-based color palettes. Export as Tailwind v4 tokens, CSS vars, or pipe directly into Claude Code via MCP." />
+    <meta property="twitter:image" content="https://hueshift.dev/og-image.png" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#863bff" />
+    <meta name="msapplication-TileColor" content="#863bff" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Hueshift",
+      "url": "https://hueshift.dev",
+      "description": "Generate accessible, OKLCH-based color palettes from a hex color or image. Export as Tailwind v4 tokens, CSS variables, SCSS, or design-token JSON. Built-in WCAG and APCA contrast checking. MCP server for AI coding agents.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "OKLCH-based color palette generation",
+        "Tailwind v4 @theme export",
+        "CSS custom properties export",
+        "SCSS variables export",
+        "W3C design tokens export",
+        "11-shade color scale generation (50-950)",
+        "WCAG AA/AAA contrast checking",
+        "APCA contrast checking",
+        "Automatic dark mode palette generation",
+        "Image color extraction",
+        "Color harmony modes: mono, analogous, complementary, triadic, split-complementary",
+        "Semantic token mapping (background, foreground, primary, muted, accent, destructive)",
+        "MCP server for Claude Code, Cursor, and Windsurf",
+        "Shareable palette URLs",
+        "sRGB gamut clamping"
+      ],
+      "screenshot": "https://hueshift.dev/og-image.png",
+      "softwareVersion": "0.1.0",
+      "creator": {
+        "@type": "Person",
+        "name": "Ankit"
+      }
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage for LLM/Search enrichment -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Hueshift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hueshift is a free, open-source color palette generator that uses the OKLCH color space for perceptually uniform palettes. It generates 11-shade color scales (50-950), semantic UI tokens for light and dark mode, and exports as Tailwind v4 @theme blocks, CSS custom properties, SCSS variables, or W3C design tokens. It also includes an MCP server so AI coding agents like Claude Code, Cursor, and Windsurf can use palettes directly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I use Hueshift with Claude Code or Cursor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Install the MCP server with one command: 'claude mcp add hueshift-mcp -- npx hueshift-mcp@latest' for Claude Code, or add {\"command\": \"npx\", \"args\": [\"hueshift-mcp@latest\"]} to your .cursor/mcp.json for Cursor. The server provides 8 tools including palette generation, contrast checking, and export to Tailwind v4."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is OKLCH and why use it for color palettes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OKLCH is a perceptually uniform color space where equal steps in lightness, chroma, and hue look equally different to the human eye. This makes it ideal for generating consistent color scales — unlike HSL where 'lightness 50%' looks dramatically different across hues. Tailwind CSS v4 adopted OKLCH as its default color format. Hueshift generates all palettes in OKLCH and gamut-clamps to sRGB for browser compatibility."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I generate a Tailwind v4 color palette from a hex color?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter your hex color (e.g. #3b82f6) in Hueshift, choose a harmony mode (analogous, complementary, triadic, etc.), and click Generate. The tool creates a full palette with 11-shade scales for each color, maps semantic tokens (background, foreground, primary, muted, accent, destructive), checks WCAG/APCA contrast, and exports a ready-to-paste Tailwind v4 @theme block with both light and dark mode tokens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I extract a color palette from an image?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Upload any image (PNG, JPG, WebP) and Hueshift extracts dominant colors using k-means clustering. It weights central pixels higher for logo-friendly extraction, ignores background colors, and generates full 11-shade OKLCH scales for each extracted color with semantic token mapping and contrast reports."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What export formats does Hueshift support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hueshift exports palettes in 6 formats: Tailwind v4 @theme blocks, CSS custom properties (variables), SCSS variables, W3C design tokens JSON, plain JSON, and hex color lists. All formats include both light and dark mode tokens with semantic role mapping following shadcn/ui conventions."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: SoftwareApplication for npm package -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "hueshift-mcp",
+      "description": "MCP server for generating OKLCH color palettes, semantic UI tokens, and accessibility-checked color scales. Works with Claude Code, Cursor, Windsurf, and any MCP-compatible AI coding agent.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "downloadUrl": "https://www.npmjs.com/package/hueshift-mcp",
+      "installUrl": "https://www.npmjs.com/package/hueshift-mcp",
+      "softwareVersion": "0.1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Ankit"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

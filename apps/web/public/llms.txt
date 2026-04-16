@@ -1,0 +1,62 @@
+# Hueshift
+
+> OKLCH color palette generator for Tailwind v4, CSS, and AI coding agents.
+
+Hueshift is a free, open-source web tool and MCP server for generating production-ready color palettes. It uses the OKLCH color space (perceptually uniform) for consistent, beautiful scales. Palettes include semantic UI tokens (background, foreground, primary, muted, accent, destructive, border, ring) for both light and dark mode.
+
+## What Hueshift does
+
+- Generates OKLCH-based color palettes from a hex color or uploaded image
+- Creates 11-shade color scales (50-950) matching Tailwind CSS conventions
+- Supports 5 harmony modes: mono, analogous, complementary, triadic, split-complementary
+- Maps palette colors to semantic UI tokens following shadcn/ui conventions
+- Checks WCAG AA, WCAG AAA, and APCA contrast on every color pair
+- Suggests accessible alternatives when contrast fails
+- Automatically generates dark mode variants
+- Exports as Tailwind v4 @theme blocks, CSS custom properties, SCSS variables, W3C design tokens, JSON, or hex lists
+- All colors are gamut-clamped to sRGB for browser compatibility
+
+## MCP Server (for AI coding agents)
+
+The `hueshift-mcp` npm package is an MCP server that gives AI coding agents (Claude Code, Cursor, Windsurf, Claude Desktop) access to palette generation, contrast checking, and code export.
+
+### Install
+
+Claude Code: `claude mcp add hueshift-mcp -- npx hueshift-mcp@latest`
+
+Cursor/Windsurf: Add to `.cursor/mcp.json`:
+```json
+{"mcpServers":{"hueshift":{"command":"npx","args":["hueshift-mcp@latest"]}}}
+```
+
+### Available MCP tools
+
+1. `generate_palette_from_hex` — Generate a full palette with scales, semantic tokens, and contrast report from a hex color
+2. `generate_palette_from_image` — Extract dominant colors from an image file and build a palette
+3. `export_palette` — Export palette as Tailwind v4, CSS vars, SCSS, W3C design tokens, JSON, or hex list
+4. `check_contrast` — Check WCAG AA/AAA and APCA contrast between two colors with auto-fix suggestions
+5. `suggest_semantic_tokens` — Map colors to semantic UI roles for light and dark mode
+6. `generate_scale` — Generate an 11-shade scale (50-950) from a single hex color
+7. `get_palette` — Retrieve a saved palette by ID or slug
+8. `list_my_palettes` — List all saved palettes
+
+Palettes are persisted to `~/.hueshift/palettes.json` across sessions.
+
+## Why OKLCH?
+
+OKLCH is a perceptually uniform color space adopted by Tailwind CSS v4. Unlike HSL, equal steps in OKLCH lightness look equally different to the human eye, making it ideal for generating consistent color scales. Hueshift computes all colors in OKLCH and converts to hex/RGB only for output.
+
+## Technical details
+
+- Built with TypeScript, React, Vite, Tailwind v4, Zustand
+- Color math via the culori library
+- Image extraction uses k-means clustering with central pixel weighting
+- MCP server uses @modelcontextprotocol/sdk over stdio
+- npm package: https://www.npmjs.com/package/hueshift-mcp
+- License: MIT
+
+## Links
+
+- Website: https://hueshift.dev
+- npm: https://www.npmjs.com/package/hueshift-mcp
+- GitHub: https://github.com/ankitgdes/hueshift
