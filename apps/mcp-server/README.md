@@ -1,8 +1,12 @@
 # hueshift-mcp
 
-MCP server for generating OKLCH-based color palettes, semantic UI tokens, and accessibility-checked color scales.
+The color palette brain your coding agent plugs into.
 
-Works with Claude Code, Cursor, Windsurf, and any MCP-compatible client.
+Generate accessible, OKLCH-based palettes from a hex color or image — then pipe them directly into your code as Tailwind v4 tokens, CSS variables, or design-token JSON. Works with Claude Code, Cursor, Windsurf, Claude Desktop, and any MCP-compatible client.
+
+## Why
+
+Every AI coding agent defaults to the same generic colors — pure black text, flat grays, dated gradients, low-contrast pairs. Hueshift fixes that. Generate a real palette, check accessibility, and export production-ready tokens without leaving your editor.
 
 ## Install
 
@@ -46,70 +50,114 @@ Add to `claude_desktop_config.json`:
 
 ### `generate_palette_from_hex`
 
-Generate a full color palette from a base hex color. Returns 11-shade scales (50-950) for each color, semantic tokens for light/dark mode, and a contrast report.
+Generate a full color palette from a base hex color. Returns 11-shade scales (50–950) for each harmony color, semantic tokens for light/dark mode, and a WCAG/APCA contrast report.
 
-**Parameters:**
-- `base_hex` (required) — Base hex color, e.g. `"#3b82f6"`
-- `harmony` — `mono`, `analogous`, `complementary`, `triadic`, `split-complementary` (default: `analogous`)
-- `include_neutrals` — Include a harmonized neutral scale (default: `true`)
-- `name` — Palette name
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `base_hex` | yes | — | Base hex color, e.g. `"#3b82f6"` |
+| `harmony` | no | `analogous` | `mono`, `analogous`, `complementary`, `triadic`, `split-complementary` |
+| `include_neutrals` | no | `true` | Include a harmonized neutral scale |
+| `name` | no | — | Palette name |
 
 ### `generate_palette_from_image`
 
-Extract dominant colors from a local image file (PNG, JPG, WebP) and generate a palette.
+Extract dominant colors from a local image file and generate a palette.
 
-**Parameters:**
-- `image_path` (required) — Absolute path to the image
-- `count` — Number of colors to extract (default: `6`)
-- `weight_central` — Weight central pixels higher (default: `true`)
-- `name` — Palette name
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `image_path` | yes | — | Absolute path to the image (PNG, JPG, WebP) |
+| `count` | no | `6` | Number of colors to extract |
+| `weight_central` | no | `true` | Weight central pixels higher (useful for logos) |
+| `name` | no | — | Palette name |
 
 ### `export_palette`
 
-Export a palette as ready-to-paste code.
+Export a palette as ready-to-paste code. Supports Tailwind v4, CSS custom properties, SCSS, W3C design tokens, JSON, and hex list.
 
-**Parameters:**
-- `base_hex` or `palette_id` — Source color or saved palette
-- `format` (required) — `tailwind-v4`, `css-vars`, `scss`, `design-tokens-w3c`, `json`, `hex-list`
-- `harmony` — Harmony type (default: `analogous`)
-- `include_dark_mode` — Include dark mode tokens (default: `true`)
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `base_hex` or `palette_id` | yes | — | Source color or saved palette ID/slug |
+| `format` | yes | — | `tailwind-v4`, `css-vars`, `scss`, `design-tokens-w3c`, `json`, `hex-list` |
+| `harmony` | no | `analogous` | Harmony type (when using `base_hex`) |
+| `include_dark_mode` | no | `true` | Include dark mode tokens |
 
 ### `check_contrast`
 
-Check WCAG AA, AAA, and APCA contrast between two colors. Suggests adjusted colors when the pair fails.
+Check WCAG AA, AAA, and APCA contrast between two colors. Suggests an adjusted color when the pair fails.
 
-**Parameters:**
-- `foreground` (required) — Foreground color (hex)
-- `background` (required) — Background color (hex)
-- `standard` — `wcag-aa`, `wcag-aaa`, `apca` (default: `wcag-aa`)
-- `text_size` — `normal`, `large` (default: `normal`)
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `foreground` | yes | — | Foreground color (hex) |
+| `background` | yes | — | Background color (hex) |
+| `standard` | no | `wcag-aa` | `wcag-aa`, `wcag-aaa`, `apca` |
+| `text_size` | no | `normal` | `normal`, `large` |
 
 ### `suggest_semantic_tokens`
 
-Generate semantic UI tokens (background, foreground, primary, muted, accent, destructive, border, ring) for light and dark mode.
+Generate semantic UI tokens (background, foreground, primary, muted, accent, destructive, border, ring) for both light and dark mode.
 
-**Parameters:**
-- `base_hex` (required) — Base hex color
-- `harmony` — Harmony type (default: `analogous`)
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `base_hex` | yes | — | Base hex color |
+| `harmony` | no | `analogous` | Harmony type |
+
+### `generate_scale`
+
+Generate an 11-shade color scale (50–950) from a single hex color. Useful for creating a Tailwind-style color ramp from a brand color.
+
+| Parameter | Required | Default | Description |
+|---|---|---|---|
+| `hex` | yes | — | Base hex color |
 
 ### `get_palette`
 
-Retrieve a previously saved palette by ID or slug.
+Retrieve a previously saved palette by its ID or slug.
 
 ### `list_my_palettes`
 
 List all saved palettes with summaries.
 
-### `generate_scale`
+## Example usage
 
-Generate an 11-shade color scale (50-950) from a single hex color.
+**Image to Tailwind config:**
+
+```
+You: I've uploaded a hero image at ./assets/hero.jpg.
+     Use its colors to theme my Tailwind v4 config.
+
+Agent: [calls generate_palette_from_image → export_palette("tailwind-v4")]
+       "I extracted a palette from your hero image — warm terracotta primary,
+       cool stone neutrals, sage accent. I've updated app/globals.css with
+       the @theme block."
+```
+
+**Hex to full design system:**
+
+```
+You: Our brand color is #3b82f6. Generate a palette and apply it.
+
+Agent: [calls generate_palette_from_hex → export_palette("css-vars")]
+       "Generated an analogous palette with primary, secondary, accent, and
+       neutral scales. Light and dark mode tokens are ready."
+```
+
+**Contrast check:**
+
+```
+You: Is this text readable? fg=#6b7280 on bg=#f3f4f6
+
+Agent: [calls check_contrast]
+       "WCAG AA fails for normal text (ratio 4.2:1, needs 4.5:1).
+       Suggestion: darken to #5b6370 for a 5.1:1 ratio."
+```
 
 ## How it works
 
-- All colors are computed in **OKLCH** (perceptually uniform) and gamut-clamped to sRGB
+- All colors computed in **OKLCH** (perceptually uniform) and gamut-clamped to sRGB
+- Semantic tokens map raw colors to UI roles following shadcn/ui conventions: `background`, `foreground`, `primary`, `muted`, `accent`, `destructive`, `border`, `ring`
 - Palettes auto-save to `~/.hueshift/palettes.json` for retrieval across sessions
-- Semantic tokens map raw colors to UI roles following shadcn/ui conventions
-- Contrast checks use WCAG 2.1 and APCA algorithms
+- Contrast checks use WCAG 2.1 and APCA algorithms with auto-fix suggestions
+- Each regeneration produces dramatically different palettes (coolors.co-style exploration)
 
 ## License
 
