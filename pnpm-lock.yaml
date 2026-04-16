@@ -14,12 +14,6 @@ importers:
 
   apps/mcp-server:
     dependencies:
-      '@hueshift/color-engine':
-        specifier: workspace:*
-        version: link:../../packages/color-engine
-      '@hueshift/types':
-        specifier: workspace:*
-        version: link:../../packages/types
       '@modelcontextprotocol/sdk':
         specifier: ^1.12.1
         version: 1.29.0(zod@4.3.6)
@@ -27,6 +21,12 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      '@hueshift/color-engine':
+        specifier: workspace:*
+        version: link:../../packages/color-engine
+      '@hueshift/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.10)(tsx@4.21.0)(typescript@6.0.2)
